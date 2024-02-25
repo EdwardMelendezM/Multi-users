@@ -1,10 +1,11 @@
-"use client"
+'use client'
 
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import * as React from "react"
 import * as z from 'zod'
 import axios from "axios"
+import { useRouter } from "next/navigation"
 
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
@@ -12,7 +13,6 @@ import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { Form, FormField } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
-import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -21,7 +21,7 @@ const formSchema = z.object({
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
-export async function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export default function UserAuthForm() {
 
   const formLogin = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -52,10 +52,8 @@ export async function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     }
   }
 
-
-
   return (
-    <div className={cn("grid gap-6", className)} {...props}>
+    <div className={cn("grid gap-6")}>
       <Form {...formLogin}>
         <form onSubmit={formLogin.handleSubmit(onSubmit)}>
           <div className="grid gap-2">
