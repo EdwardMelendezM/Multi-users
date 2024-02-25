@@ -4,8 +4,8 @@ import Link from "next/link"
 import { UserAuthForm } from "@/components/login/user-auth-form"
 
 export const metadata: Metadata = {
-  title: "Authentication",
-  description: "Authentication forms built using the components.",
+  title: "Login",
+  description: "Login de usuario para acceder al sistema",
 }
 
 export default function AuthenticationPage() {
