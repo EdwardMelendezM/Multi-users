@@ -11,6 +11,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { Form, FormField } from "@/components/ui/form"
+import { useToast } from "@/components/ui/use-toast"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email(),
@@ -19,7 +21,7 @@ const formSchema = z.object({
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
-export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
+export async function UserAuthForm({ className, ...props }: UserAuthFormProps) {
 
   const formLogin = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -29,6 +31,9 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
     },
   })
 
+  const router = useRouter()
+  const { toast } = useToast()
+
   const isLoading = formLogin.formState.isSubmitting;
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
@@ -36,11 +41,18 @@ export function UserAuthForm({ className, ...props }: UserAuthFormProps) {
       await axios.post("/api/v1/auth/login", {
         ...values
       })
+      toast({
+        title: "Bienvenido",
+        description: "Has iniciado sesión correctamente",
+      })
+      router.push("/dashboard")
       formLogin.reset()
     } catch (error) {
       console.error(error)
     }
   }
+
+
 
   return (
     <div className={cn("grid gap-6", className)} {...props}>

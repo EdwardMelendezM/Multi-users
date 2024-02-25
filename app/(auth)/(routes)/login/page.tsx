@@ -2,13 +2,19 @@ import { Metadata } from "next"
 import Link from "next/link"
 
 import { UserAuthForm } from "@/components/login/user-auth-form"
+import { getSession } from "@/lib/session"
+import { redirect } from "next/navigation"
 
 export const metadata: Metadata = {
   title: "Login",
   description: "Login de usuario para acceder al sistema",
 }
 
-export default function AuthenticationPage() {
+export default async function AuthenticationPage() {
+  const session = await getSession()
+
+  if (session) redirect("/dashboard")
+
   return (
     <>
       <div className="container relative h-[800px] flex-col items-center justify-center grid lg:max-w-none lg:grid-cols-2 lg:px-0">
