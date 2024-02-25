@@ -1,6 +1,7 @@
 import { Metadata } from "next"
 import Link from "next/link"
-import { UserAuthForm } from "./components/user-auth-form"
+
+import { UserAuthForm } from "@/components/login/user-auth-form"
 
 export const metadata: Metadata = {
   title: "Authentication",
@@ -31,9 +32,7 @@ export default function AuthenticationPage() {
           <div className="relative z-20 mt-auto">
             <blockquote className="space-y-2">
               <p className="text-lg">
-                &ldquo;This library has saved me countless hours of work and
-                helped me deliver stunning designs to my clients faster than
-                ever before.&rdquo;
+                &ldquo;Esta es una aplicacion que combina el uso de multi roles y menu dinamico como template.&rdquo;
               </p>
               <footer className="text-sm">Mele dev</footer>
             </blockquote>
