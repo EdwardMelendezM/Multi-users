@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { env } from "process";
 
 type User = {
-  email: string;
+  id: string;
 }
 
 const secretKey = env.JWT_SECRET_KEY;

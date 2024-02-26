@@ -3,7 +3,7 @@ import { getSession, loginSession } from "@/lib/session";
 import { NextRequest, NextResponse } from "next/server";
 
 type User = {
-  email: string;
+  id: string;
 }
 
 export async function POST(
@@ -29,11 +29,11 @@ export async function POST(
       }, { status: 404 });
     }
 
-    const user: User = { email };
+    //@ts-ignore
+    const userId = response[0].id as string;
+
+    const user: User = { id: userId };
     await loginSession(user);
-
-
-
 
     return NextResponse.json({ data: "success" });
 
