@@ -48,6 +48,12 @@ export default function UserAuthForm() {
       router.push("/dashboard")
       formLogin.reset()
     } catch (error) {
+      toast({
+        title: "Error",
+        description: "Usuario no encontrado",
+      })
+      console.log("ERROR");
+
       console.error(error)
     }
   }
