@@ -16,7 +16,8 @@ export async function POST(
       return NextResponse.json("Email are required", { status: 400 });
     }
 
-    const query = `SELECT * FROM users WHERE email = ? AND password = ?`
+    const query = 'SELECT * FROM users WHERE email = ? AND password = ?'
+
     const response = await client(query, [email, password]);
 
     //@ts-ignore

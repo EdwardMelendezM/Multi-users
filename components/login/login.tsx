@@ -45,21 +45,7 @@ export default function Login() {
           </div>
           <UserAuthForm />
           <p className="px-8 text-center text-sm text-muted-foreground">
-            Click para continuar, agrega los terminos{" "}
-            <Link
-              href="/terms"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Terminos de servicio
-            </Link>{" "}
-            y{" "}
-            <Link
-              href="/privacy"
-              className="underline underline-offset-4 hover:text-primary"
-            >
-              Politicas
-            </Link>
-            .
+            Servicio de prueba
           </p>
         </div>
       </div>

@@ -13,13 +13,12 @@ import { Input } from "@/components/ui/input"
 import { Icons } from "@/components/icons"
 import { Form, FormField } from "@/components/ui/form"
 import { useToast } from "@/components/ui/use-toast"
+import { errorMessage } from "@/error.message.enum"
 
 const formSchema = z.object({
   email: z.string().email(),
   password: z.string().min(1),
 })
-
-interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> { }
 
 export default function UserAuthForm() {
 
@@ -31,6 +30,7 @@ export default function UserAuthForm() {
     },
   })
 
+
   const router = useRouter()
   const { toast } = useToast()
 
@@ -41,20 +41,21 @@ export default function UserAuthForm() {
       await axios.post("/api/v1/auth/login", {
         ...values
       })
+      router.push("/dashboard")
+      formLogin.reset()
       toast({
         title: "Bienvenido",
         description: "Has iniciado sesión correctamente",
       })
-      router.push("/dashboard")
-      formLogin.reset()
-    } catch (error) {
+
+    } catch (error: any) {
+      const errorCode = error.response.data.code as string
+      const message = errorMessage[errorCode] || "Consulte con el administrador del sistema"
       toast({
         title: "Error",
-        description: "Usuario no encontrado",
+        description: message,
+        variant: "destructive"
       })
-      console.log("ERROR");
-
-      console.error(error)
     }
   }
 
