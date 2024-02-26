@@ -3,12 +3,19 @@ import { Search } from "./search";
 import TeamSwitcher from "./team-switcher";
 import { UserNav } from "./user-nav";
 
-export default function Navbar() {
+import { View } from "@/lib/get-views"
+interface NavbarProps {
+  views: View[]
+}
+
+export default function Navbar({
+  views
+}: NavbarProps) {
   return (
     <div className="border-b">
       <div className="flex h-16 items-center px-4">
         <TeamSwitcher />
-        <MainNav className="mx-6" />
+        <MainNav views={views} />
         <div className="ml-auto flex items-center space-x-4">
           <Search />
           <UserNav />

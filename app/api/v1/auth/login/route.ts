@@ -1,5 +1,5 @@
 import { client } from "@/lib/client";
-import { loginSession } from "@/lib/session";
+import { getSession, loginSession } from "@/lib/session";
 import { NextRequest, NextResponse } from "next/server";
 
 type User = {
@@ -11,6 +11,11 @@ export async function POST(
 ) {
   try {
     const { email, password } = await req.json();
+    const session = await getSession();
+
+    if (!session) {
+      return NextResponse.json("Unauthorized", { status: 404 });
+    }
 
     if (!email) {
       return NextResponse.json("Email are required", { status: 400 });
@@ -34,7 +39,7 @@ export async function POST(
     return NextResponse.json({ data: "success" });
 
   } catch (error) {
-    console.log(error);
+    console.log("POST_LOGIN", error);
     return new NextResponse("Error", { status: 500 });
   }
 }

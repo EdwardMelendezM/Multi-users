@@ -1,40 +1,27 @@
 import Link from "next/link"
 
 import { cn } from "@/lib/utils"
+import { View } from "@/lib/get-views"
+
+interface MainNavProp {
+  views: View[]
+}
 
 export function MainNav({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLElement>) {
+  views
+}: MainNavProp) {
   return (
     <nav
-      className={cn("flex items-center space-x-4 lg:space-x-6", className)}
-      {...props}
-    >
-      <Link
-        href="/examples/dashboard"
-        className="text-sm font-medium transition-colors hover:text-primary"
-      >
-        Overview
-      </Link>
-      <Link
-        href="/examples/dashboard"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Customers
-      </Link>
-      <Link
-        href="/examples/dashboard"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Products
-      </Link>
-      <Link
-        href="/examples/dashboard"
-        className="text-sm font-medium text-muted-foreground transition-colors hover:text-primary"
-      >
-        Settings
-      </Link>
+      className={cn("mx-6 flex items-center space-x-4 lg:space-x-6")}>
+      {views.map((view) => (
+        <Link
+          key={view.id}
+          href={view.path}
+          className="text-sm font-medium transition-colors hover:text-primary"
+        >
+          {view.name[0].toUpperCase() + view.name.slice(1)}
+        </Link>
+      ))}
     </nav>
   )
 }
