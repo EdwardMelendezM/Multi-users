@@ -16,8 +16,12 @@ export const getViews = async (email: string) => {
     return redirect('/')
   }
 
-  const query = 'SELECT id, name, path, created_at FROM views WHERE deleted_at IS NULL'
+  const query = 'SELECT id, name, path, created_at FROM views WHERE deleted_at IS NULL ORDER BY number;'
   const response = await client(query, []);
+
+  if (!response) {
+    return []
+  }
 
   return response as View[]
 }

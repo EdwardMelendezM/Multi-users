@@ -10,12 +10,8 @@ export async function POST(
   req: NextRequest,
 ) {
   try {
-    const { email, password } = await req.json();
-    const session = await getSession();
 
-    if (!session) {
-      return NextResponse.json("Unauthorized", { status: 404 });
-    }
+    const { email, password } = await req.json();
 
     if (!email) {
       return NextResponse.json("Email are required", { status: 400 });
@@ -35,6 +31,9 @@ export async function POST(
 
     const user: User = { email };
     await loginSession(user);
+
+
+
 
     return NextResponse.json({ data: "success" });
 
