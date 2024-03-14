@@ -9,3 +9,4 @@
 - Roles with views
 - User with roles and this with views
 - View for modules
+- Puntos de venta - Prox.
