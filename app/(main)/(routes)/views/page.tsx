@@ -36,9 +36,6 @@ export default async function TaskPage() {
               Mantenimiento de vistas
             </p>
           </div>
-          {/* <div className="flex items-center space-x-2">
-            <UserNav />
-          </div> */}
         </div>
         <DataTable data={tasks} columns={columns} />
       </div>
