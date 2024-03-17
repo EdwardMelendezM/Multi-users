@@ -19,7 +19,6 @@ export const getModules = async () => {
     const query = 'SELECT id, name, number, created_at FROM modules WHERE deleted_at IS NULL ORDER BY number;'
     const response = await client(query, []);
 
-    console.log(response)
     if (response.error) {
         return [] as Module[]
     }

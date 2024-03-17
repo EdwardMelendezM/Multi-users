@@ -35,7 +35,7 @@ export const CellActionModule: React.FC<CellActionModuleProps> = ({
     const onConfirm = async () => {
         try {
             setLoading(true);
-            await axios.delete(`/api/v1/views/${data.id}`);
+            await axios.delete(`/api/v1/modules/${data.id}`);
             toast({
                 title: "Exito!",
                 description: "Eliminado correctamente.",
